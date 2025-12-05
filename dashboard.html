@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <nav class="p-4 bg-gray-800 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-blue-400">AI Masterclass</h1>
+        <div class="flex gap-4">
+            <span id="userEmail" class="text-gray-300 text-sm mt-1"></span>
+            <button id="logoutBtn" class="bg-red-500 text-xs px-3 py-1 rounded hover:bg-red-600">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-6">
+        <h2 class="text-2xl mb-6">Your Training Modules</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 hover:border-blue-500 transition relative">
+                <span class="absolute top-2 right-2 bg-green-900 text-green-300 text-xs px-2 py-1 rounded">FREE</span>
+                <h3 class="text-xl font-bold mb-2">Text-to-Video</h3>
+                <p class="text-gray-400 text-sm mb-4">Learn to use RunwayML and Pika.</p>
+                <div id="progress-textToVideo" class="hidden text-green-400 text-xs mb-2">✅ Completed</div>
+                <a href="tutorials/text-to-video.html" class="block text-center bg-blue-600 py-2 rounded hover:bg-blue-500">Start</a>
+            </div>
+
+           <div class="premium-content bg-gray-800 p-6 rounded-lg border border-yellow-600 relative">
+    <div id="lockOverlay" class="absolute inset-0 bg-gray-900/80 flex flex-col items-center justify-center rounded-lg">
+        <span class="text-3xl mb-2">🔒</span>
+        <a href="upgrade.html" class="bg-yellow-500 text-black px-4 py-2 rounded font-bold hover:bg-yellow-400">Upgrade to Access</a>
+    </div>
+    </div>
+
+    <script type="module">
+        import { auth, onAuthStateChanged, getUserProfile, logoutUser } from './js/firebase-config.js';
+
+        const emailDisplay = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check Auth State
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // 1. Show Email
+                emailDisplay.innerText = user.email;
+
+                // 2. Fetch Firestore Data
+                const userData = await getUserProfile(user.uid);
+
+                if (userData) {
+                    // 3. Handle Premium Content
+                    if (userData.tier === 'premium') {
+                        // Remove lock overlays if user is premium
+                        const locks = document.querySelectorAll('#lockOverlay');
+                        locks.forEach(el => el.style.display = 'none');
+                    }
+
+                    // 4. Update Progress Indicators
+                    if (userData.progress && userData.progress.textToVideo) {
+                        document.getElementById('progress-textToVideo').classList.remove('hidden');
+                    }
+                }
+
+            } else {
+                // No user? Redirect to login
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout Action
+        logoutBtn.addEventListener('click', async () => {
+            await logoutUser();
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

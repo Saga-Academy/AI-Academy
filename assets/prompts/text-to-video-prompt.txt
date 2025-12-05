@@ -1,0 +1,33 @@
+# AI Training Academy - Text-to-Video Master Prompt
+
+## Module: Text-to-Video (RunwayML / Pika Labs Style)
+
+### **The Cinematic Masterpiece Prompt Formula**
+
+Use the following structure for maximum visual impact and control:
+
+[SCENE DESCRIPTION], [ACTION/MOVEMENT], [STYLE/AESTHETICS], [CAMERA WORK], [TECHNICAL PARAMETERS]
+
+---
+
+### **Prompt Example 1 (Hyper-Realistic Sci-Fi):**
+
+A chrome robot, reflective surface, standing on a sand dune at sunset. The robot is slowly raising its head to look at the massive ringed planet on the horizon.
+**STYLE:** Hyper-detailed, photorealistic, cinematic, soft volumetric lighting, warm golden hour tones.
+**CAMERA:** Ultra-wide shot, slow 360-degree orbit around the robot, shallow depth of field.
+**TECHNICAL:** 4K, 24fps, high motion coherence.
+
+---
+
+### **Prompt Example 2 (Abstract & Dreamy):**
+
+Abstract watercolor painting of a giant whale swimming through a dense purple fog. The fog dissipates into swirling pink bokeh lights.
+**STYLE:** Watercolor illustration, soft edges, ethereal, dreamlike quality, highly textured paper background.
+**MOVEMENT:** Whale slowly turns, the fog gently drifts across the screen.
+**TECHNICAL:** Low motion scale, focus on color flow.
+
+---
+
+### **Actionable Tip:**
+
+If the video result is too chaotic, reduce the "motion scale" or the number of moving elements in your prompt. Focus on one main action per generation.

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Video Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <nav class="p-4 bg-gray-800 flex justify-between items-center border-b border-gray-700">
+        <a href="../dashboard.html" class="text-blue-400 hover:text-blue-300">← Back to Dashboard</a>
+        <h1 class="font-bold text-lg">Module 1: Text-to-Video</h1>
+    </nav>
+
+    <div class="container mx-auto p-6 max-w-4xl">
+        
+        <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden border border-gray-700 mb-8 shadow-lg">
+            <iframe class="w-full h-[400px]" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg mb-8">
+            <h3 class="text-xl font-bold mb-4">The Golden Prompt</h3>
+            <div class="bg-gray-900 p-4 rounded border border-gray-700 font-mono text-sm text-gray-300 mb-4" id="promptText">
+Cinematic shot of a futuristic cyberpunk city, neon lights, rain on pavement, highly detailed, 8k resolution, unreal engine 5 render, wide angle.
+            </div>
+            
+            <div class="flex gap-4">
+                <button id="copyBtn" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-500 transition">Copy Prompt</button>
+                <a href="../assets/prompts/text-to-video-prompt.txt" download class="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600 transition">Download .txt</a>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center border-t border-gray-700 pt-6">
+            <p class="text-gray-400">Finished watching? Track your progress.</p>
+            <button id="completeBtn" class="bg-green-500 px-6 py-3 rounded font-bold hover:bg-green-600 transition shadow-lg shadow-green-900/50">Mark as Complete</button>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { auth, onAuthStateChanged, getUserProfile, markTutorialComplete } from '../js/firebase-config.js';
+        import { copyToClipboard, setButtonCompletedState } from '../js/ui-logic.js';
+
+        const TUTORIAL_KEY = 'textToVideo'; // Matches Firestore field
+        const completeBtn = document.getElementById('completeBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const promptText = document.getElementById('promptText').innerText;
+
+        // 1. Auth & Progress Check
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // Check if already completed
+            const data = await getUserProfile(user.uid);
+            if (data && data.progress && data.progress[TUTORIAL_KEY]) {
+                setButtonCompletedState(completeBtn);
+            }
+        });
+
+        // 2. Handle "Mark Complete"
+        completeBtn.addEventListener('click', async () => {
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    completeBtn.innerText = "Saving...";
+                    await markTutorialComplete(user.uid, TUTORIAL_KEY);
+                    setButtonCompletedState(completeBtn);
+                    // Optional: Celebrate with confetti or alert
+                    // alert("Progress saved!");
+                } catch (error) {
+                    console.error("Error saving progress:", error);
+                    completeBtn.innerText = "Error - Try Again";
+                }
+            }
+        });
+
+        // 3. Handle Copy
+        copyBtn.addEventListener('click', () => {
+            copyToClipboard(promptText, copyBtn);
+        });
+    </script>
+</body>
+</html>

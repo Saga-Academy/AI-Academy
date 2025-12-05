@@ -1,0 +1,65 @@
+# AI Training Academy - Image-to-Video Master Prompt
+
+## Module: Image-to-Video Transformation (e.g., RunDiffusion, Pika Labs, Gen-2 Motion Brush)
+
+### **The Golden Rule for Image-to-Video:**
+
+Your goal is to describe the **desired motion** and **camera shift**, NOT the original image content. The AI already sees the image.
+
+---
+
+### **Prompt Section 1: Describing the Motion Mask (Motion Brush)**
+
+This section is crucial if you are using a mask or brush tool to define a region of motion. The prompt should reinforce the specific action on the masked area.
+
+**Targeted Motion Prompts (Use on Masked Areas):**
+
+1.  **Water/Fluid:** The clear, reflective water surface gently ripples and flows rapidly towards the right, catching the morning sunlight.
+2.  **Smoke/Fog:** The heavy, low-lying fog slowly lifts and swirls upward, dissipating into the bright sky.
+3.  **Hair/Cloth:** The model’s long red hair blows dynamically in a strong wind coming from the upper left. The silk cloak billows and snaps behind her.
+4.  **Fire/Energy:** Intense magical energy pulses outwards from the object's center, releasing shimmering sparks that quickly fade into the air.
+5.  **Growth/Change:** The delicate green vines slowly twist and climb up the stone column, sprouting tiny white flowers along the path.
+
+---
+
+### **Prompt Section 2: Camera and Environment Dynamics (Global Motion)**
+
+This section controls the overall movement of the virtual camera and background elements not controlled by the mask.
+
+**Camera Movement (Use for subtle cinematic feel):**
+
+* **Zoom/Pan:** Slow, continuous cinematic zoom in on the subject's face, increasing tension.
+* **Rotation:** Gentle, almost imperceptible 5-degree counter-clockwise rotation, giving an unnerving effect.
+* **Dolly Shot:** The camera slowly tracks forward through the dense jungle canopy.
+* **Tilt/Angle:** Slow vertical tilt downward, revealing the canyon floor below the subject.
+
+**Environmental Movement (If not masked):**
+
+* The distant clouds drift across the pale blue sky at a steady pace.
+* The large leaves on the trees sway softly in a warm summer breeze.
+* Subtle rainfall begins to gently mist the window glass in the foreground.
+
+---
+
+### **Prompt Section 3: Negative Prompts (What to Avoid)**
+
+Use these to maintain coherence and prevent common artifacts or stylistic drift.
+
+* `--NO motion blur, low quality, warping, excessive distortion, glitching, morphing, frame rate drops, pixelation, blurry background.`
+* `--NO stylistic change, do not add watercolor effect, do not change the subject’s expression.`
+
+---
+
+### **Prompt Synthesis Example:**
+
+**Original Image:** A close-up of a medieval knight standing still in front of a ruined castle wall.
+
+**Final, Combined Image-to-Video Prompt:**
+
+`The wind catches the knight's silk banner, causing it to flap wildly. Dense, grey smoke drifts slowly off the ruins. Slow push-in cinematic zoom on the knight. --NO warping, low quality, face distortion.`
+
+---
+
+### **Actionable Tip for Length:**
+
+While longer prompts can be more descriptive, for Image-to-Video, **precision beats length**. Prioritize high-impact verbs (e.g., "billows," "ripples," "twists") over long descriptive adjectives.
