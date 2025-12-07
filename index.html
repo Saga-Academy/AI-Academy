@@ -3,175 +3,129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SAGA Ai-Hub — Master AI Video Creation</title>
+  <title>SAGA Ai-Hub — Master AI Tools</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="/favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-  
+
   <style>
-    :root {
-      --sw-primary: #FF2222;
-      --sw-accent: #FF5555;
-      --sw-glow: #FF0000;
-      --sw-bg-start: #1a0000;
-      --sw-bg-end: #000000;
-    }
-
     body {
-      background: linear-gradient(to bottom, var(--sw-bg-start), var(--sw-bg-end));
-      color: #FFF;
+      background: linear-gradient(to bottom, #1a0000, #000000);
+      color: white;
       font-family: 'Roboto Condensed', sans-serif;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    h1, h3 {
+    h11 {
       font-family: 'Orbitron', sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .fade-in { 
-      animation: fadeIn 1.5s ease-out forwards; 
-      opacity: 0; 
-    }
-    @keyframes fadeIn { 
-      0% { opacity: 0; transform: translateY(20px); } 
-      100% { opacity: 1; transform: translateY(0); } 
-    }
-
-    /* Main Sith glow title */
-    h1 {
-      font-size: 5.5rem;
-      line-height: 1;
-      background: linear-gradient(to bottom, #FF6666 0%, #FF2222 40%, #CC0000 100%);
+      background: linear-gradient(to bottom, #FF6666, #FF2222, #CC0000);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 
-        0 0 20px rgba(255,0,0,0.8),
-        0 0 40px rgba(255,0,0,0.6),
-        0 0 80px rgba(255,0,0,0.4);
-    }
-	
-	    h11 {
-      font-size: 2.5rem;
-      line-height: 1;
-      background: linear-gradient(to bottom, #FF6666 0%, #FF2222 40%, #CC0000 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 
-        0 0 20px rgba(255,0,0,0.8),
-        0 0 40px rgba(255,0,0,0.6),
-        0 0 80px rgba(255,0,0,0.4);
+      text-shadow: 0 0 35px rgba(255,0,0,0.7);
     }
 
-    /* Pulsing red glow */
-    .glow {
-      animation: sithPulse 4s infinite ease-in-out;
-    }
-    @keyframes sithPulse {
-      0%, 100% { 
-        filter: drop-shadow(0 0 15px rgba(255,0,0,0.6)); 
-      }
-      50% { 
-        filter: drop-shadow(0 0 40px rgba(255,0,0,0.9)); 
-      }
+    .hero-bg {
+      height: 35vh; /* Mobile priority */
+      background-image: url('https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/594727021_122108136831130472_5855214629211723575_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=pPfB7htLngYQ7kNvwHxOl7U&_nc_oc=AdlwNgNU3UlOFV_KBsPYjP3XiTEsh0--x8GC7If_1HmlB7Df8wQgW1AeOVyar90D-8w&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=qY8Qc_pqRzVb6nYraANuVA&oh=00_AfmRWDzibmAhp5PYl-0fpY93eKYrxAejK2XqhDtA-AvCtQ&oe=693B02FC');
+      background-size: cover;
+      background-position: center;
     }
 
-    /* Buttons - Dark Side style */
+    @media (min-width: 768px) {
+      .hero-bg { height: 55vh; }
+    }
+
+    .card {
+      background: rgba(20,0,0,0.6);
+      border: 1px solid #440000;
+      box-shadow: 0 0 18px rgba(255,0,0,0.4);
+      backdrop-filter: blur(4px);
+    }
+
     .btn-sith {
       background: linear-gradient(to bottom, #FF2222, #AA0000);
-      box-shadow: 0 0 20px rgba(255,0,0,0.7);
-      transition: all 0.3s;
+      transition: .3s;
+      box-shadow: 0 0 15px rgba(255,0,0,.5);
     }
+
     .btn-sith:hover {
-      background: linear-gradient(to bottom, #FF4444, #CC0000);
-      box-shadow: 0 0 35px rgba(255,0,0,0.9);
-      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(255,0,0,.9);
+      transform: scale(1.05);
     }
 
     .btn-dark {
       background: #111;
       border: 1px solid #440000;
-      box-shadow: 0 0 15px rgba(255,0,0,0.4);
+      transition: .3s;
     }
     .btn-dark:hover {
       background: #222;
-      box-shadow: 0 0 25px rgba(255,0,0,0.6);
-    }
-
-    /* Cards */
-    .card {
-      background: rgba(20,0,0,0.6);
-      border: 1px solid #440000;
-      box-shadow: 0 0 25px rgba(255,0,0,0.4);
-      backdrop-filter: blur(4px);
+      box-shadow: 0 0 20px rgba(255,0,0,.5);
     }
   </style>
 </head>
 
-<body class="bg-black text-white min-h-screen flex flex-col">
-  <header class="container mx-auto px-6 py-8 flex items-center justify-between border-b border-red-900/50">
-    <a href="index.html" class="flex items-center gap-4">
-      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-black flex items-center justify-center text-2xl font-bold border-2 border-red-500 shadow-lg glow">
-        S
+<body class="min-h-screen flex flex-col">
+
+  <!-- HERO IMAGE (NO TEXT) -->
+  <div class="hero-bg w-full"></div>
+
+  <!-- HEADER MOBILE-FIRST -->
+  <header class="px-4 py-5 flex items-center justify-between border-b border-red-900/40">
+    <a href="index.html" class="flex items-center gap-3">
       </div>
       <div class="hidden md:block">
-        <div class="text-sm text-red-400 tracking-widest">SAGA</div>
-        <div class="text-2xl font-bold text-red-500">Ai-Hub</div>
+        <div class="text-xs text-red-300 tracking-wider">SAGA</div>
+        <div class="text-xl font-bold text-red-500">Ai-Hub</div>
       </div>
     </a>
-    <nav class="flex items-center gap-6">
+
+    <!-- MOBILE FIRST NAV -->
+    <nav class="flex gap-3 text-sm md:text-base">
       <a href="tutorials/text-to-video.html" class="text-red-300 hover:text-red-100 transition">Tutorials</a>
-      <a href="register.html" class="px-6 py-3 btn-sith rounded-lg text-white font-bold">Start for Free</a>
-      <a href="login.html" class="px-6 py-3 btn-dark rounded-lg text-red-200 font-medium">Member Login</a>
+      <a href="register.html" class="btn-sith px-4 py-2 rounded-md font-bold">Join</a>
     </nav>
   </header>
 
-  <main class="flex-grow flex items-center justify-center px-6">
-    <section class="text-center max-w-5xl fade-in space-y-10">
-      <h11 class="glow">
-        Singapore Academy for Gen3 Ai
-      </h11>
-      <p class="text-red-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed opacity-90">
-        Join the elite order of creators. Master Text-to-Video, Image-to-Video, and autonomous AI agents.<br>
-        Track your ascension, earn certification, and forge your dark legacy.
-      </p>
 
-      <div class="flex gap-6 justify-center mt-8">
-        <a href="register.html" class="px-10 py-4 btn-sith rounded-xl text-xl font-bold shadow-2xl">
-          Start for Free
-        </a>
-        <a href="login.html" class="px-10 py-4 btn-dark rounded-xl text-xl font-medium">
-          Member Login
-        </a>
-      </div>
+  <!-- MAIN CONTENT (Mobile priority alignment) -->
+  <main class="flex-grow px-5 py-10 text-center">
+    <h11 class="text-3xl md:text-5xl font-bold leading-tight">Singapore Academy for Gen3 AI</h11>
 
-      <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="card p-8 rounded-xl">
-          <h3 class="font-bold text-2xl text-red-400">Text → Video</h3>
-          <p class="text-red-300 mt-3 text-sm leading-relaxed">
-            Forge cinematic masterpieces from the raw power of the written word.
-          </p>
-        </div>
-        <div class="card p-8 rounded-xl">
-          <h3 class="font-bold text-2xl text-red-400">Image → Video</h3>
-          <p class="text-red-300 mt-3 text-sm leading-relaxed">
-            Breathe unholy life into still images with the fury of the dark side.
-          </p>
-        </div>
-        <div class="card p-8 rounded-xl">
-          <h3 class="font-bold text-2xl text-red-400">Autonomous Agents</h3>
-          <p class="text-red-300 mt-3 text-sm leading-relaxed">
-            Command legions of AI agents to execute your will without mercy.
-          </p>
-        </div>
+    <p class="text-red-200 text-base md:text-xl mt-4 max-w-xl mx-auto">
+      Learn AI Video Creation, Autonomous Agents, and Prompt Engineering — designed for absolute beginners.
+    </p>
+
+    <!-- MOBILE-FRIENDLY BUTTON LAYOUT -->
+    <div class="flex flex-col md:flex-row gap-4 justify-center mt-8">
+      <a href="register.html" class="btn-sith px-8 py-4 rounded-xl text-lg font-bold">Start Free</a>
+      <a href="login.html" class="btn-dark px-8 py-4 rounded-xl text-lg">Login</a>
+    </div>
+
+
+    <!-- FEATURE CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+      <div class="card p-6 rounded-xl">
+        <h3 class="text-xl text-red-400 font-bold">Text → Video</h3>
+        <p class="text-red-300 mt-2 text-sm">Turn ideas into cinematic video instantly.</p>
       </div>
-    </section>
+      <div class="card p-6 rounded-xl">
+        <h3 class="text-xl text-red-400 font-bold">Image → Video</h3>
+        <p class="text-red-300 mt-2 text-sm">Animate and enhance images using AI.</p>
+      </div>
+      <div class="card p-6 rounded-xl">
+        <h3 class="text-xl text-red-400 font-bold">AI Agents</h3>
+        <p class="text-red-300 mt-2 text-sm">Automate workflows and build AI assistants.</p>
+      </div>
+    </div>
   </main>
 
-  <footer class="text-red-800 text-center p-8 border-t border-red-900/30">
-    <p class="text-sm">&copy; 2025 SAGA Ai-Hub — All rights reserved. The dark side is eternal.</p>
+
+  <!-- FOOTER -->
+  <footer class="text-red-800 text-center py-6 text-xs md:text-sm border-t border-red-900/30">
+    © 2025 SAGA Ai-Hub — Future belongs to creators.
   </footer>
+
 </body>
 </html>
